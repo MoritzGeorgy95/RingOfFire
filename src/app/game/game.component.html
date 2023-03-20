@@ -1,10 +1,12 @@
 <div class="board">
   <div class="card-stack">
     <img
-      *ngFor="let c of [1, 2, 3, 4, 5]; let i = index"
-      [ngStyle]="{'right': i * 10 +'px'}"
-      src="assets/img/cards/ace_1.png"
+      *ngFor="let c of [1, 2, 3, 4]; let i = index"
+      [ngStyle]="{'right': i * 20 +'px'}"
+      [src]="pickCardAnimation && i == 3 ? 'assets/img/cards/ace_1.png' : 'assets/img/card_cover.png'"
       alt="card"
+      [ngClass]="{'last-image': i == 3, 'card-animation': pickCardAnimation && i == 3}"
+      (click)="drawCard()" 
     />
   </div>
 </div>
