@@ -12,7 +12,7 @@ export class StartComponent {
 
   } 
 
-  newGame() {
+  startGame() {
     //start game 
     this.router.navigateByUrl('/game');
   }
