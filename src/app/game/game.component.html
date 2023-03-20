@@ -1,0 +1,10 @@
+<div class="board">
+  <div class="card-stack">
+    <img
+      *ngFor="let c of [1, 2, 3, 4, 5]; let i = index"
+      [ngStyle]="{'right': i * 10 +'px'}"
+      src="assets/img/cards/ace_1.png"
+      alt="card"
+    />
+  </div>
+</div>

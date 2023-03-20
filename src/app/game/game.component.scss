@@ -1,0 +1,17 @@
+.board {
+    height: 100vh;
+    background-image: url('/assets/img/Hintergrund.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.card-stack {
+    position: relative;
+    img {
+        width: 120px;
+        position: absolute;
+    }
+}

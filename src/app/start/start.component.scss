@@ -1,0 +1,39 @@
+.startscreen-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(0, 0, 0) 0%,
+    rgb(64, 64, 64) 90.2%
+  );
+
+  .img-wrapper {
+    width: 80%;
+    position: relative;
+    img {
+      width: 100%;
+    }
+    button {
+      position: absolute;
+      bottom: 5rem;
+      right: 50%;
+      transform: translateX(50%);
+      z-index: 1;
+      padding: 10px 40px;
+      border-radius: 7px;
+      border: 3px solid transparent;
+      font-size: 1.5rem;
+      color: white;
+      background: #feb102;
+      transition: 225ms all ease-in-out;
+      cursor: pointer;
+      &:hover {
+        color: #feb102;
+        background: white;
+        border: 3px solid #feb102;
+      }
+    }
+  }
+}
