@@ -2,11 +2,37 @@
   <div class="card-stack">
     <img
       *ngFor="let c of [1, 2, 3, 4]; let i = index"
-      [ngStyle]="{'right': i * 20 +'px'}"
-      [src]="pickCardAnimation && i == 3 ? 'assets/img/cards/' + currentCard + '.png' : 'assets/img/card_cover.png'"
+      [src]="
+        pickCardAnimation && i == 3
+          ? 'assets/img/cards/' + currentCard + '.png'
+          : 'assets/img/card_cover.png'
+      "
       alt="card"
-      [ngClass]="{'last-image': i == 3, 'card-animation': pickCardAnimation && i == 3}"
-      (click)="drawCard()" 
+      [ngClass]="{
+        'last-image': i == 3,
+        'card-animation': pickCardAnimation && i == 3
+      }"
+      (click)="i == 3 && drawCard()"
+    />
+
+    <img
+      *ngFor="let card of game.playedCards"
+      src="assets/img/cards/{{ card }}.png"
+      class="played-card"
     />
   </div>
+  <app-player
+    *ngFor="let player of game.players; let i = index"
+    [ngStyle]="{ 'position': 'absolute', 'bottom.px': 16, 'left.px': 16 + (250 * i) }"
+    [name]="player"
+    [playerActive]="i == game.currentPlayer ? true : false"
+  ></app-player>
+  <button (click)= "openDialog()" mat-fab color="primary" class="btn-add">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button (click)= "nextPlayer()" mat-fab color="primary" class="btn-next">
+    <mat-icon>arrow_forward_ios</mat-icon>
+  </button>
+  <app-infor-card [card]="currentCard" class="info-card"></app-infor-card>
 </div>
+

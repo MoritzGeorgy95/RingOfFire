@@ -1,30 +1,88 @@
 .board {
-    height: 100vh;
-    background-image: url('/assets/img/Hintergrund.jpg');
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  background-image: url("/assets/img/Hintergrund.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-
 .card-stack {
-    position: relative;
-    img {
-        width: 120px;
-        position: absolute;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  margin-left: 180px;
+  img {
+    width: 120px;
+  }
+
+  img:first-of-type {
+    transform: translateX(-180px);
+  }
+
+  img:nth-of-type(2) {
+    transform: translateX(-120px);
+  }
+
+  img:nth-of-type(3) {
+    transform: translateX(-60px);
+  }
+
+  .last-image {
+    transition: all 225ms ease-in-out;
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.2) !important;
+    }
+  }
+
+  .card-animation {
+    animation: pick-card-animation 2000ms ease-in-out;
+  }
+
+  @keyframes pick-card-animation {
+    0% {
+      transform: translate(0, 0);
     }
 
-    .last-image {
-        transition: all 225ms ease-in-out;
-        cursor: pointer;
-        &:hover {
-            transform: scale(1.2);
-        }
+    50% {
+      transform: translate(90px, -375px);
     }
 
-    .card-animation {
-        transform: translateY(-400px) !important;
+    100% {
+      transform: translate(0, 0);
     }
+  }
 
+  .played-card {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+ 
+}
+
+.info-card {
+  position: absolute;
+  right: 50px;
+  left: 50px;
+  bottom: 250px;
+  background: white;
+  border-radius: 10px;
+}
+
+.btn-add {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.btn-next {
+  position: absolute;
+  right: 6rem;
+  bottom: 1rem;
 }
