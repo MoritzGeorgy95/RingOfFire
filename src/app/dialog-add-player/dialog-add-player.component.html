@@ -1,10 +1,15 @@
 <h1 mat-dialog-title>Add new player</h1>
 <div mat-dialog-content>
   <p>Please enter the name of the new player</p>
-  <mat-form-field>
-    <mat-label>New player name</mat-label>
-    <input matInput [(ngModel)]="name" />
-  </mat-form-field>
+  <div>
+    <label>New player name</label> <input matInput [(ngModel)]="name" />
+  </div>
+  <div>
+    <label>male</label>
+    <input type="checkbox" matInput />
+    <label>female</label>
+    <input type="checkbox" matInput />
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
