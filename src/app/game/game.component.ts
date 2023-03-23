@@ -1,7 +1,20 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Game } from '../models/models';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import {
+  collectionData,
+  DocumentReference,
+  Firestore,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  DocumentData,
+} from 'firebase/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -9,15 +22,31 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  constructor(public dialog: MatDialog, public viewContainerRef: ViewContainerRef) {}
+  constructor(
+    public dialog: MatDialog,
+    public viewContainerRef: ViewContainerRef,
+    private firestore: Firestore,
+    public router: ActivatedRoute
+  ) {
+    this.gamesCollection = collection(this.firestore, 'games');
+    // this.games$ = collectionData(this.gamesCollection);
+  }
 
   game: Game;
   pickCardAnimation = false;
   currentCard: any;
-  name:string;
+  name: string;
+  // games$: Observable<any>;
+  gamesCollection: CollectionReference<DocumentData>;
 
   ngOnInit(): void {
-    this.newGame();
+    
+    this.router.params.subscribe((params) => {
+        console.log(params);})
+
+    // this.newGame();
+    // 
+    // addDoc(this.gamesCollection, this.game.toJSON());
   }
 
   drawCard() {
@@ -29,9 +58,6 @@ export class GameComponent implements OnInit {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
       }, 1000);
-
-      // setTimeout(()=> {
-      // }, 2000)
     }
   }
 
@@ -41,22 +67,22 @@ export class GameComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
-      viewContainerRef: this.viewContainerRef
+      viewContainerRef: this.viewContainerRef,
     });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.name = result;
-        if (this.name != undefined) {
-          this.game.players.push(this.name);          
-        }
-      });
-    }
-  
+    dialogRef.afterClosed().subscribe((result) => {
+      this.name = result;
+      if (this.name != undefined) {
+        this.game.players.push(this.name);
+      }
+    });
+  }
+
   nextPlayer() {
     if (this.game.players.length > 1) {
       this.game.currentPlayer++;
-      this.game.currentPlayer= this.game.currentPlayer % this.game.players.length;
+      this.game.currentPlayer =
+        this.game.currentPlayer % this.game.players.length;
     }
-   
   }
 }

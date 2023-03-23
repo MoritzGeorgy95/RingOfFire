@@ -14,6 +14,6 @@ export class StartComponent {
 
   startGame() {
     //start game 
-    this.router.navigateByUrl('/game');
+    this.router.navigateByUrl('/game/new');
   }
 }
