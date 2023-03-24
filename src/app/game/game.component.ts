@@ -10,43 +10,55 @@ import {
 import { Observable } from 'rxjs';
 import {
   addDoc,
+  onSnapshot,
   collection,
   CollectionReference,
+  doc,
   DocumentData,
+  getDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { update } from 'firebase/database';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
+
+
+
+
+
+
+
+
+
+
 export class GameComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public viewContainerRef: ViewContainerRef,
     private firestore: Firestore,
     public router: ActivatedRoute
-  ) {
-    this.gamesCollection = collection(this.firestore, 'games');
-    // this.games$ = collectionData(this.gamesCollection);
-  }
+  ) {}
 
   game: Game;
   pickCardAnimation = false;
   currentCard: any;
   name: string;
-  // games$: Observable<any>;
+  gameUrl: string;
   gamesCollection: CollectionReference<DocumentData>;
 
-  ngOnInit(): void {
-    
-    this.router.params.subscribe((params) => {
-        console.log(params);})
+  ngOnInit(){
 
-    // this.newGame();
-    // 
-    // addDoc(this.gamesCollection, this.game.toJSON());
+
+    this.newGame();
+    this.gamesCollection = collection(this.firestore, 'games');
+    const currentGame= onSnapshot(doc(this.gamesCollection, "PkES8Q9qpMk5FtYBNiDl"), (doc) => {
+      console.log("Current data: ", doc.data())})
+    
   }
 
   drawCard() {
@@ -56,9 +68,11 @@ export class GameComponent implements OnInit {
 
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
+        // this.ngOnChange();
         this.pickCardAnimation = false;
       }, 1000);
     }
+   
   }
 
   newGame() {
@@ -75,6 +89,7 @@ export class GameComponent implements OnInit {
       if (this.name != undefined) {
         this.game.players.push(this.name);
       }
+      // this.ngOnChange();
     });
   }
 
@@ -82,7 +97,14 @@ export class GameComponent implements OnInit {
     if (this.game.players.length > 1) {
       this.game.currentPlayer++;
       this.game.currentPlayer =
-        this.game.currentPlayer % this.game.players.length;
+      this.game.currentPlayer % this.game.players.length;
+      // this.ngOnChange();
     }
+  }
+
+  ngOnChange() {
+    // const id = this.gameUrl.split('/')[1];
+    // const documentReference = doc(this.firestore, `games/${id}`);
+    // updateDoc(documentReference, this.game.toJSON());
   }
 }

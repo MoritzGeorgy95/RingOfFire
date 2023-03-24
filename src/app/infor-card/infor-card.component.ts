@@ -30,9 +30,12 @@ export class InforCardComponent implements OnChanges{
   @Input() card: string;
 
   ngOnChanges(): void {
-    let cardNumber= +this.card.split('_')[1];
-    this.title= this.cardInfos[cardNumber - 1].title;
-    this.description= this.cardInfos[cardNumber - 1].description;
+    if (this.card) {
+      let cardNumber= +this.card.split('_')[1];
+      this.title= this.cardInfos[cardNumber - 1].title;
+      this.description= this.cardInfos[cardNumber - 1].description;
+    }
+    
   }
   
 }

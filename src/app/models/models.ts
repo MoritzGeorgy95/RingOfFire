@@ -26,7 +26,7 @@ export class Game {
       players: this.players,
       stack: this.stack,
       playedCards: this.playedCards,
-      currenPlayer: this.currentPlayer
+      currentPlayer: this.currentPlayer
     }
   }
 }
