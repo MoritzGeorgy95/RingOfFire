@@ -16,13 +16,13 @@
     />
 
     <img
-      *ngFor="let card of game.playedCards"
+      *ngFor="let card of game?.playedCards || []"
       src="assets/img/cards/{{ card }}.png"
       class="played-card"
     />
   </div>
   <app-player
-    *ngFor="let player of game.players; let i = index"
+    *ngFor="let player of game?.players || []; let i = index"
     [ngStyle]="{ 'position': 'absolute', 'bottom.px': 16, 'left.px': 16 + (250 * i) }"
     [name]="player"
     [playerActive]="i == game.currentPlayer ? true : false"
