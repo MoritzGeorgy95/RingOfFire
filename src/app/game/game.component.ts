@@ -3,7 +3,6 @@ import { Game } from '../models/models';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { Firestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import {
   addDoc,
   onSnapshot,
@@ -69,7 +68,7 @@ export class GameComponent implements OnInit {
         this.game.stack = this.currentGame.stack;
         this.game.players = this.currentGame.players;
         this.game.playedCards = this.currentGame.playedCards;
-        this.game.currentPlayer = this.game.currentPlayer;
+        this.game.currentPlayer = this.currentGame.currentPlayer;
       }}
     )
   }
