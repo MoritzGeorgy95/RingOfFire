@@ -3,14 +3,14 @@
     <img
       *ngFor="let c of [1, 2, 3, 4]; let i = index"
       [src]="
-        pickCardAnimation && i == 3
-          ? 'assets/img/cards/' + currentCard + '.png'
+        game?.pickCardAnimation && i == 3
+          ? 'assets/img/cards/' + game?.currentCard + '.png'
           : 'assets/img/card_cover.png'
       "
       alt="card"
       [ngClass]="{
         'last-image': i == 3,
-        'card-animation': pickCardAnimation && i == 3
+        'card-animation': game?.pickCardAnimation && i == 3
       }"
       (click)="i == 3 && drawCard()"
     />
@@ -33,6 +33,6 @@
   <button (click)= "nextPlayer()" mat-fab color="primary" class="btn-next">
     <mat-icon>arrow_forward_ios</mat-icon>
   </button>
-  <app-infor-card [card]="currentCard" class="info-card"></app-infor-card>
+  <app-infor-card [card]="game?.currentCard" class="info-card"></app-infor-card>
 </div>
 

@@ -31,8 +31,6 @@ export class GameComponent implements OnInit {
   ) {}
 
   game: Game;
-  pickCardAnimation = false;
-  currentCard: any;
   name: string;
   gameUrl: any;
   gamesCollection: CollectionReference<DocumentData>;
@@ -56,6 +54,8 @@ export class GameComponent implements OnInit {
         this.game.players = this.currentGame.players;
         this.game.playedCards = this.currentGame.playedCards;
         this.game.currentPlayer = this.game.currentPlayer;
+        this.game.pickCardAnimation= this.currentGame.pickCardAnimation;
+        this.game.currentCard= this.currentGame.currentCard;
       } else {
         alert('No game in database with current ID!');
       }
@@ -69,19 +69,22 @@ export class GameComponent implements OnInit {
         this.game.players = this.currentGame.players;
         this.game.playedCards = this.currentGame.playedCards;
         this.game.currentPlayer = this.currentGame.currentPlayer;
+        this.game.pickCardAnimation= this.currentGame.pickCardAnimation;
+        this.game.currentCard= this.currentGame.currentCard;
       }}
     )
   }
 
   drawCard() {
-    if (!this.pickCardAnimation) {
-      this.pickCardAnimation = true;
-      this.currentCard = this.game.stack.pop();
+    if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.pickCardAnimation = true;
+      this.updateDatabase();
 
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
         this.updateDatabase();
-        this.pickCardAnimation = false;
       }, 1000);
     }
   }
@@ -125,9 +128,3 @@ export class GameComponent implements OnInit {
   }
 }
 
-// this.currentGame = onSnapshot(
-//   doc(this.gamesCollection, this.gameUrl),
-//   (doc) => {
-//     console.log('Current data: ', doc.data());
-//   }
-// );

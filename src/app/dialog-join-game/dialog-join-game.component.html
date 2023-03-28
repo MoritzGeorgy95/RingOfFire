@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Join existing game</h1>
+<div mat-dialog-content>
+  <p>Please enter game ID</p>
+  <div>
+    <input matInput [(ngModel)]="id" />
+  </div>
+</div>
+<div mat-dialog-actions> 
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="id" cdkFocusInitial>Ok</button>
+</div>
