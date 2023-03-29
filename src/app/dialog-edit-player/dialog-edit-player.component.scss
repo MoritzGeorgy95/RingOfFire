@@ -9,4 +9,10 @@ li {
     background: #6156CC;
     color: white;
     border-radius: 5pc;
+    cursor: pointer;
+    transition: all 225ms ease-in-out;
+    &:hover {
+        background: #7f76d7;
+    }
 }
+

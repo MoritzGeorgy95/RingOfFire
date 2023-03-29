@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Game } from '../models/models';
 import { MatDialog } from '@angular/material/dialog';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { DialogGameManualComponent } from '../dialog-game-manual/dialog-game-manual.component';
 import { DialogEditPlayerComponent } from '../dialog-edit-player/dialog-edit-player.component';
@@ -62,13 +62,13 @@ export class GameComponent implements OnInit {
       }
     });
 
-    //listen for real time updates 
+    //listen for real time updates
     onSnapshot(doc(this.gamesCollection, this.gameUrl), (doc) => {
       if (doc.exists()) {
         this.currentGame = doc.data();
         this.setGame();
-      }}
-    )
+      }
+    });
   }
 
   drawCard() {
@@ -82,24 +82,22 @@ export class GameComponent implements OnInit {
         this.game.pickCardAnimation = false;
         this.updateDatabase();
       }, 1000);
-    }
+    } else if (!this.game.pickCardAnimation && this.game.stack.length == 0) {
+      for (let i = 1; i < 14; i++) {
+        this.game.stack.push('hearts_' + i);
+      }
+      for (let i = 1; i < 14; i++) {
+        this.game.stack.push('ace_' + i);
+      }
+      for (let i = 1; i < 14; i++) {
+        this.game.stack.push('clubs_' + i);
+      }
+      for (let i = 1; i < 14; i++) {
+        this.game.stack.push('diamonds_' + i);
+      }
 
-  else if (!this.game.pickCardAnimation && this.game.stack.length == 0) {
-    for (let i = 1; i < 14; i++) {
-      this.game.stack.push('hearts_' + i);
+      shuffle(this.game.stack);
     }
-    for (let i = 1; i < 14; i++) {
-      this.game.stack.push('ace_' + i);
-    }
-    for (let i = 1; i < 14; i++) {
-      this.game.stack.push('clubs_' + i);
-    }
-    for (let i = 1; i < 14; i++) {
-      this.game.stack.push('diamonds_' + i);
-    }
-
-    shuffle(this.game.stack)
-  }
   }
 
   newGame() {
@@ -113,21 +111,18 @@ export class GameComponent implements OnInit {
   }
 
   openEditDialog() {
-    const dialogRef= this.dialog.open(DialogEditPlayerComponent, {
+    const dialogRef = this.dialog.open(DialogEditPlayerComponent, {
       viewContainerRef: this.viewContainerRef,
-      data: {players: this.game.players,
-             gender: this.game.gender 
+      data: { players: this.game.players, gender: this.game.gender },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.game.players = result.players;
+        this.game.gender = result.gender;
+        this.updateDatabase();
       }
     });
-
-    dialogRef.afterClosed().subscribe((result) => { 
-
-      this.game.players= result.players;
-      this.game.gender= result.gender;
-      this.updateDatabase();
-
-    });
-    
   }
 
   openAddPlayerDialog() {
@@ -136,15 +131,12 @@ export class GameComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
       this.name = result.name;
-      this.gender= result.male;
+      this.gender = result.male;
 
-      if(this.gender) {
+      if (this.gender) {
         this.game.gender.push('male');
-      }
-
-      else if (!this.gender) {
+      } else if (!this.gender) {
         this.game.gender.push('female');
       }
 
@@ -158,7 +150,8 @@ export class GameComponent implements OnInit {
   nextPlayer() {
     if (this.game.players.length > 1) {
       this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.game.currentPlayer =
+        this.game.currentPlayer % this.game.players.length;
       console.log(this.game.currentPlayer);
       this.updateDatabase();
     }
@@ -175,8 +168,8 @@ export class GameComponent implements OnInit {
     return snap.data();
   }
 
-  backToMenu(){
-    this.router.navigateByUrl('');  
+  backToMenu() {
+    this.router.navigateByUrl('');
   }
 
   setGame() {
@@ -184,9 +177,8 @@ export class GameComponent implements OnInit {
     this.game.players = this.currentGame.players;
     this.game.playedCards = this.currentGame.playedCards;
     this.game.currentPlayer = this.currentGame.currentPlayer;
-    this.game.pickCardAnimation= this.currentGame.pickCardAnimation;
-    this.game.currentCard= this.currentGame.currentCard;
-    this.game.gender= this.currentGame.gender;
+    this.game.pickCardAnimation = this.currentGame.pickCardAnimation;
+    this.game.currentCard = this.currentGame.currentCard;
+    this.game.gender = this.currentGame.gender;
   }
 }
-

@@ -57,34 +57,32 @@
   }
 
   @keyframes pick-card-animation {
-  0% {
-    left: 0;
-    bottom: 0;
+    0% {
+      left: 0;
+      bottom: 0;
+    }
+
+    25% {
+      left: calc(50% - 150px);
+      bottom: calc(100% + 3rem);
+    }
+
+    50% {
+      left: calc(50% - 150px);
+      bottom: calc(100% + 3rem);
+    }
+
+    90% {
+      left: calc(50% - 150px);
+      bottom: calc(100% + 3rem);
+    }
+
+    100% {
+      top: unset;
+      left: 0;
+      transform: translate(0, 0);
+    }
   }
-
-  25% {
-    left: calc(50% - 150px);
-    bottom: calc(100% + 3rem);
-  }
-
-
-  50% {
-    left: calc(50% - 150px);
-    bottom: calc(100% + 3rem);
-  }
-
-  90% {
-    left: calc(50% - 150px);
-    bottom: calc(100% + 3rem);
-  }
-
-  100% {
-    top: unset;
-    left: 0;
-    transform: translate(0, 0);
-  }
-}
-
 }
 
 .played-card {
@@ -131,5 +129,32 @@
 
 .mat-custom {
   color: white;
-  background: #6156CC;
+  background: #6156cc;
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    flex-direction: column-reverse;
+    .info-card {
+      width: unset;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card-stack {
+    img {
+      width: 90px;
+    }
+  }
+
+  .btn-home {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .player-sidebar {
+    max-height: 450px;
+  }
 }
