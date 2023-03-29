@@ -1,4 +1,5 @@
 <div class="player-container">
-    <img src="assets/img/avatar_male.png" alt="player" [ngClass]="{'active': playerActive}">
+    <img [src]="gender[i] == 'male' ? 'assets/img/avatar_male.png' : 'assets/img/avatar_female.png' " alt="player" [ngClass]="{'active': playerActive}">
     <span>{{ name }}</span>
 </div>
+

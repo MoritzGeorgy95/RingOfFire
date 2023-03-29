@@ -1,38 +1,87 @@
 <div class="board">
+  <button
+    (click)="backToMenu()"
+    mat-fab
+    color="custom"
+    class="btn-home"
+    matTooltip="Go back to start menu"
+    [matTooltipPosition]="'right'"
+  >
+    <mat-icon>home</mat-icon>
+  </button>
   <div class="card-stack">
     <img
-      *ngFor="let c of [1, 2, 3, 4]; let i = index"
+      *ngFor="let c of [1, 2, 3]; let i = index"
+      src="assets/img/card_cover.png"
+    />
+
+    <img
       [src]="
-        game?.pickCardAnimation && i == 3
+        game?.pickCardAnimation
           ? 'assets/img/cards/' + game?.currentCard + '.png'
           : 'assets/img/card_cover.png'
       "
       alt="card"
       [ngClass]="{
-        'last-image': i == 3,
-        'card-animation': game?.pickCardAnimation && i == 3
+        'last-image': true,
+        'card-animation': game?.pickCardAnimation
       }"
-      (click)="i == 3 && drawCard()"
+      (click)="drawCard()"
     />
-
+    <img src="assets/img/card_cover.png" alt="placeholder" class="placeholder-img">
     <img
-      *ngFor="let card of game?.playedCards || []"
-      src="assets/img/cards/{{ card }}.png"
-      class="played-card"
-    />
+    *ngFor="let card of game?.playedCards || []"
+    src="assets/img/cards/{{ card }}.png"
+    class="played-card"
+  />
   </div>
-  <app-player
-    *ngFor="let player of game?.players || []; let i = index"
-    [ngStyle]="{ 'position': 'absolute', 'bottom.px': 16, 'left.px': 16 + (250 * i) }"
-    [name]="player"
-    [playerActive]="i == game.currentPlayer ? true : false"
-  ></app-player>
-  <button (click)= "openDialog()" mat-fab color="primary" class="btn-add">
-    <mat-icon>add</mat-icon>
-  </button>
-  <button (click)= "nextPlayer()" mat-fab color="primary" class="btn-next">
-    <mat-icon>arrow_forward_ios</mat-icon>
-  </button>
-  <app-infor-card [card]="game?.currentCard" class="info-card"></app-infor-card>
-</div>
 
+
+
+  <div class="player-sidebar">
+    <app-player
+      *ngFor="let player of game?.players || []; let i = index"
+      [name]="player"
+      [gender]="game.gender"
+      [playerActive]="i == game.currentPlayer ? true : false"
+      [i]="i"
+      (click)="openEditDialog()"
+    ></app-player>
+  </div> 
+
+  <div class="footer">
+    <app-infor-card
+      [card]="game?.currentCard"
+      class="info-card"
+    ></app-infor-card>
+    <div>
+      <button
+      (click)="openGameInfoDialog()"
+      mat-fab
+      color="custom"
+      class="btn-add"
+      matTooltip="Game Info"
+    >
+      <mat-icon>menu_book</mat-icon>
+    </button>
+      <button
+      (click)="openAddPlayerDialog()"
+      mat-fab
+      color="custom"
+      class="btn-add"
+      matTooltip="Add New Player"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      (click)="nextPlayer()"
+      mat-fab
+      color="custom"
+      class="btn-next"
+      matTooltip="Next Player"
+    >
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+    </div>
+  </div>
+</div>

@@ -2,10 +2,13 @@
 <div mat-dialog-content>
   <p>Please enter the name of the new player</p>
   <div>
-    <label>New player name</label> <input matInput [(ngModel)]="name" />
+    <label>New player name</label>
+    <input matInput [(ngModel)]="data.name" style="margin-left: 1rem" />
+    <mat-checkbox class="example-margin" [(ngModel)]="data.male" (click)="toggleMale()">Male</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="data.female" (click)="toggleFemale()">Female</mat-checkbox>
   </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 </div>

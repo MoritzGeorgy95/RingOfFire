@@ -9,5 +9,7 @@ import { Game } from '../models/models';
 export class PlayerComponent {
   
   @Input() name:string; 
-  @Input() playerActive:boolean;
+  @Input() playerActive:boolean; 
+  @Input() i:number;
+  @Input() gender: string[];
 }

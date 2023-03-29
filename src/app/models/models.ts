@@ -5,6 +5,7 @@ export class Game {
   public currentPlayer: number = 0;
   public pickCardAnimation:boolean = false;
   public  currentCard: any= '';
+  public gender: string[] = [];
 
   constructor() {
     for (let i = 1; i < 14; i++) {
@@ -30,14 +31,15 @@ export class Game {
       playedCards: this.playedCards,
       currentPlayer: this.currentPlayer,
       pickCardAnimation: this.pickCardAnimation,
-      currentCard: this.currentCard
+      currentCard: this.currentCard,
+      gender: this.gender
     }
   }
-
+ 
 }
 
 
-function shuffle(array:any) {
+export function shuffle(array:any) {
     let currentIndex = array.length,  randomIndex;
   
     // While there remain elements to shuffle.

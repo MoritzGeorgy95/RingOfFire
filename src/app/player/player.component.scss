@@ -4,10 +4,10 @@
     align-items: center;
     flex-direction: column;
     color: white;
-    border-radius: 20px;
+    border-radius: 20px 0 0 20px;
     background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    
+    cursor: pointer;
     padding: 10px 60px;
     img {
         width: 50px;
@@ -15,7 +15,8 @@
 
     span {
         font-size: 1.5rem;
-        margin-left: 1rem;
+        margin-top: 1rem;
+        text-align: center;
     }
 
     .active {

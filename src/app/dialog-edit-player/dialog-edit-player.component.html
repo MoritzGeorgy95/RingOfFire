@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>List of Players</h1>
+<div mat-dialog-content>
+  <ul>
+    <li
+      *ngFor="let player of data.players; let i = index"
+    >
+      {{ player }} <button class="btn" (click)="delete(i)">Delete</button>
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

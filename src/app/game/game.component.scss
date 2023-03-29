@@ -8,12 +8,18 @@
   position: relative;
 }
 
+.btn-home {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
 .card-stack {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
-  margin-left: 180px;
+  position: relative;
   img {
     width: 120px;
   }
@@ -30,59 +36,100 @@
     transform: translateX(-60px);
   }
 
+  .placeholder-img {
+    z-index: 1;
+  }
+
   .last-image {
     transition: all 225ms ease-in-out;
-    z-index: 1;
+    z-index: 2;
+    position: absolute;
+    left: 0;
     cursor: pointer;
-    &:hover {
-      transform: scale(1.2) !important;
-    }
+  }
+
+  .last-image:not(.card-animation):hover {
+    transform: scale(1.2);
   }
 
   .card-animation {
-    animation: pick-card-animation 2000ms ease-in-out;
+    animation: pick-card-animation 2500ms ease-in-out;
   }
 
   @keyframes pick-card-animation {
-    0% {
-      transform: translate(0, 0);
-    }
-
-    50% {
-      transform: translate(90px, -375px);
-    }
-
-    100% {
-      transform: translate(0, 0);
-    }
+  0% {
+    left: 0;
+    bottom: 0;
   }
 
-  .played-card {
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
+  25% {
+    left: calc(50% - 150px);
+    bottom: calc(100% + 3rem);
   }
- 
+
+
+  50% {
+    left: calc(50% - 150px);
+    bottom: calc(100% + 3rem);
+  }
+
+  90% {
+    left: calc(50% - 150px);
+    bottom: calc(100% + 3rem);
+  }
+
+  100% {
+    top: unset;
+    left: 0;
+    transform: translate(0, 0);
+  }
 }
 
-.info-card {
-  position: absolute;
-  right: 50px;
-  left: 50px;
-  bottom: 200px;
-  background: white;
-  border-radius: 10px;
 }
 
-.btn-add {
+.played-card {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  width: 120px;
+  bottom: calc(100% + 3rem);
+  left: calc(50% - 150px);
 }
 
-.btn-next {
+.footer {
   position: absolute;
-  right: 6rem;
-  bottom: 1rem;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 1rem 1rem;
+
+  .info-card {
+    background: white;
+    border-radius: 10px;
+    width: 70%;
+  }
+
+  button:nth-of-type(2) {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+}
+
+.player-sidebar {
+  position: absolute;
+  right: 0;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.mat-custom {
+  color: white;
+  background: #6156CC;
 }
