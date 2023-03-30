@@ -66,13 +66,13 @@
 @media screen and (max-width: 700px) {
   .startscreen-container {
     img {
-      max-width: 100%;
+      max-width: 115%;
     }
   }
 
   svg {
     width: 1000px;
-    top: 10rem;
+    top: -1rem;
   }
 
   .button {
@@ -81,13 +81,15 @@
   }
 
   .button-1 {
-    bottom: 18rem;
+    bottom: 13rem;
   }
 
   .button-2 {
-    bottom: 14rem;
+    bottom: 9rem;
   }
 }
+
+
 
   
 
