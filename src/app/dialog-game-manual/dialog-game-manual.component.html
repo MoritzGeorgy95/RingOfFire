@@ -1,24 +1,87 @@
 <h1 mat-dialog-title>Game Information</h1>
 <div mat-dialog-content>
   <p>
-    ⌂ : Press the home button to return to the starting menu <br />
-    + : Press the plus button to add a new player <br />
-    ˃ : Press the arrow button to select the next player in turn <br />
-    <br />
+    To invite friends copy the Game ID and send it to them so they can paste it
+    in the join game prompt: 
+  </p> 
+  <h2 style="color: rgb(97, 86, 204); cursor: pointer" (click)="copy(data.URL)">{{ data.URL }}</h2>
 
+  <p>
     Game of Fire is a popular card drinking game that requires players to have
     quick reflexes and a high tolerance for alcohol. The game is played with a
     deck of cards and at least four players. To start, the deck of cards is
     shuffled and placed in a circle face down. A cup filled with a shot of
     alcohol is placed in the center of the circle. Players take turns picking up
-    a card from the deck and following the corresponding rule: <br> <br></p>
+    a card from the deck and following the corresponding rule:
+  </p>
 
-    <ul>
-        <li>Ace: Waterfall. All players start drinking at the same time, and no one can stop until the player to their right stops.</li>
-
-    </ul>    
-
-
+  <ul>
+    <li>
+      <h2>Waterfall</h2>
+      <p>
+        Everyone has to start drinking at the same time. As soon as player 1
+        stops drinking, player 2 may stop drinking. Player 3 may stop as soon as
+        player 2 stops drinking, and so on.
+      </p>
+    </li>
+    <li>
+      <h2>You</h2>
+      <p>You decide who drinks</p>
+    </li>
+    <li>
+      <h2>Me</h2>
+      <p>Congrats! Drink a shot!</p>
+    </li>
+    <li>
+      <h2>Category</h2>
+      <p>
+        Come up with a category (e.g. Colors). Each player must enumerate one
+        item from the category.
+      </p>
+    </li>
+    <li>
+      <h2>Bust a jive</h2>
+      <p>
+        Player 1 makes a dance move. Player 2 repeats the dance move and adds a
+        second one.
+      </p>
+    </li>
+    <li>
+      <h2>Chicks</h2>
+      <p>All girls drink.</p>
+    </li>
+    <li>
+      <h2>Heaven</h2>
+      <p>Put your hands up! The last player drinks!</p>
+    </li>
+    <li>
+      <h2>Mate</h2>
+      <p>
+        Pick a mate. Your mate must always drink when you drink and the other
+        way around.
+      </p>
+    </li>
+    <li>
+      <h2>Thumbmaster</h2>
+      <p>Choose a thumbmaster</p>
+    </li>
+    <li>
+      <h2>Men</h2>
+      <p>All men drink.</p>
+    </li>
+    <li>
+      <h2>Quizmaster</h2>
+      <p>Choose a quizmaster</p>
+    </li>
+    <li>
+      <h2>Never have i ever...</h2>
+      <p>Say something you never did. Everyone who did it has to drink.</p>
+    </li>
+    <li>
+      <h2>Rule</h2>
+      <p>Make a rule. Everyone needs to drink when he breaks the rule.</p>
+    </li>
+  </ul>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Ok</button>

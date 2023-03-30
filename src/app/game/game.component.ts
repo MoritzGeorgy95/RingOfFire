@@ -107,6 +107,7 @@ export class GameComponent implements OnInit {
   openGameInfoDialog() {
     this.dialog.open(DialogGameManualComponent, {
       viewContainerRef: this.viewContainerRef,
+      data: { URL: this.gameUrl }
     });
   }
 
